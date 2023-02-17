@@ -1,4 +1,4 @@
-## ✅ 2. react-state-events
+## 2. react-state-events
 
 ### 1. Handling Events
 
