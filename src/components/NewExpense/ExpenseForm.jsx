@@ -2,12 +2,16 @@ import "./ExpenseForm.css";
 
 //비용 데이터를 모으는 폼의 구조화해서 사용자들이 title을 입력하도록 할 겁니다
 export const ExpenseForm = () => {
+  const titleChangeHandler = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
     <form>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" />
+          <input type="text" onChange={titleChangeHandler} />
         </div>
 
         <div className="new-expense__control">
