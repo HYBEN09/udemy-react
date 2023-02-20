@@ -1,9 +1,22 @@
+import { useState } from "react";
 import "./ExpenseForm.css";
 
 //비용 데이터를 모으는 폼의 구조화해서 사용자들이 title을 입력하도록 할 겁니다
 export const ExpenseForm = () => {
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
+
   const titleChangeHandler = (e) => {
-    console.log(e.target.value);
+    setEnteredTitle(e.target.value);
+  };
+
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
+
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
   };
 
   return (
@@ -16,12 +29,22 @@ export const ExpenseForm = () => {
 
         <div className="new-expense__control">
           <label>Amount</label>
-          <input type="number" min="0.01" step="0.01" />
+          <input
+            type="number"
+            min="0.01"
+            step="0.01"
+            onChange={amountChangeHandler}
+          />
         </div>
 
         <div className="new-expense__control">
           <label>Date</label>
-          <input type="date" min="2020-01-01" step="2023-12-31" />
+          <input
+            type="date"
+            min="2020-01-01"
+            step="2023-12-31"
+            onChange={dateChangeHandler}
+          />
         </div>
       </div>
       <div className="new-expense__actions">
