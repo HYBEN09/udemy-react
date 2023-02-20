@@ -1,22 +1,40 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-//비용 데이터를 모으는 폼의 구조화해서 사용자들이 title을 입력하도록 할 겁니다
+//* 비용 데이터를 모으는 폼의 구조화해서 사용자들이 title을 입력하도록 할 겁니다
 export const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+  // const [enteredTitle, setEnteredTitle] = useState("");
+  // const [enteredAmount, setEnteredAmount] = useState("");
+  // const [enteredDate, setEnteredDate] = useState("");
+
+  const [userInput, setUserInput] = useState({
+    enteredTitle: "",
+    enteredAmount: "",
+    enteredDate: "",
+  });
 
   const titleChangeHandler = (e) => {
-    setEnteredTitle(e.target.value);
+    // setEnteredTitle(e.target.value);
+    setUserInput({
+      ...userInput,
+      enteredTitle: e.target.value,
+    });
   };
 
-  const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
+  const amountChangeHandler = (e) => {
+    // setEnteredAmount(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredAmount: e.target.value,
+    });
   };
 
-  const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
+  const dateChangeHandler = (e) => {
+    // setEnteredDate(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredDate: e.target.value,
+    });
   };
 
   return (
