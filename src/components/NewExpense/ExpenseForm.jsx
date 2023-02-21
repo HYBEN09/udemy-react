@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 //* 비용 데이터를 모으는 폼의 구조화해서 사용자들이 title을 입력하도록 할 겁니다
-export const ExpenseForm = () => {
+export const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -29,7 +29,7 @@ export const ExpenseForm = () => {
       date: new Date(enteredDate),
     };
 
-    console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
