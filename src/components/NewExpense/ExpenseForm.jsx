@@ -25,7 +25,7 @@ export const ExpenseForm = (props) => {
     // ExpenseData 객체를 생성 ➡️ 그리고 입력된 모든 데이터를 결합
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
