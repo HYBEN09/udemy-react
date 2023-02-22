@@ -12,6 +12,16 @@ export function AddUser() {
 
   const addUserHandler = (e) => {
     e.preventDefault();
+
+    //유효성 검사
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+    //나이값은 숫자가 아닌 문자열로 반환이 되어 안전하게 +enteredAge하여 숫자형으로 바꿔줌.
+    if (+enteredAge < 1) {
+      return;
+    }
+
     console.log(enteredUsername, enteredAge);
     setEnteredUsername("");
     setEnteredAge("");
