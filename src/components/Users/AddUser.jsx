@@ -13,6 +13,8 @@ export function AddUser() {
   const addUserHandler = (e) => {
     e.preventDefault();
     console.log(enteredUsername, enteredAge);
+    setEnteredUsername("");
+    setEnteredAge("");
   };
 
   const usernameChangeHandler = (e) => {
@@ -27,10 +29,20 @@ export function AddUser() {
     <Card className={classes.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">UserName</label>
-        <input id="username" type="text" onChange={usernameChangeHandler} />
+        <input
+          id="username"
+          type="text"
+          value={enteredUsername}
+          onChange={usernameChangeHandler}
+        />
 
         <label htmlFor="age">Age (Years )</label>
-        <input id="age" type="Number" onChange={ageChangeHandler} />
+        <input
+          id="age"
+          type="Number"
+          value={enteredAge}
+          onChange={ageChangeHandler}
+        />
 
         <Button type="submit">Add User</Button>
       </form>
