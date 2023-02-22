@@ -16,6 +16,9 @@ export function Expenses(props) {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
+  // filteredExpenses 배열이 공백이라면 아무 것도 렌더링하지 않음
+  // filteredExpenses에 맞는 목록이 있으면 보여 주기
+
   let expensesContent = <p>No expense found</p>;
 
   if (filteredExpenses.length > 0) {
@@ -35,7 +38,6 @@ export function Expenses(props) {
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
       />
-
       {expensesContent}
     </Card>
   );
