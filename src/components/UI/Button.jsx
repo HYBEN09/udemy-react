@@ -1,4 +1,5 @@
-import classes from "./Button.module.css";
+import classes from './Button.module.css';
+import React from 'react';
 
 function Button(props) {
   const { type, onClick, children } = props;
@@ -6,7 +7,7 @@ function Button(props) {
   return (
     <button
       className={classes.button}
-      type={type || "button"}
+      type={type || 'button'}
       onClick={onClick}
     >
       {children}
