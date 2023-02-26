@@ -1,5 +1,6 @@
-import Card from "../UI/Card";
-import classes from "./UserList.module.css";
+import Card from '../UI/Card';
+import classes from './UserList.module.css';
+import React from 'react';
 
 export function UserList(props) {
   return (
