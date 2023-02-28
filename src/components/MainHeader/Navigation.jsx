@@ -3,8 +3,8 @@ import { AuthContext } from "../../Context/AuthContext";
 
 import classes from "./Navigation.module.css";
 //사용자가 인증되었는지 여부를 알고 싶다
-const Navigation = ({ onLogout }) => {
-  const { isLoggedIn } = useContext(AuthContext);
+const Navigation = () => {
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
 
   return (
     <nav className={classes.nav}>

@@ -34,9 +34,10 @@ function App() {
       // value 객체는  IsLoggedIn이 변경될 때마다 리액트에 의해 업데이트
       value={{
         isLoggedIn: isLoggedIn,
+        onLogout: logoutHandler,
       }}
     >
-      <MainHeader onLogout={logoutHandler} />
+      <MainHeader />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
