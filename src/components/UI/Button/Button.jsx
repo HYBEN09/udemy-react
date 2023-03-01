@@ -1,10 +1,13 @@
-import classes from "./Button.module.css";
+import React from "react";
 import classNames from "classnames";
 
-export function Button({ children, onClick, disabled, className }) {
+import classes from "./Button.module.css";
+
+const Button = ({ className, type, onClick, disabled, children }) => {
+  console.log("Button RUNNING");
   return (
     <button
-      type="button"
+      type={type || "button"}
       className={classNames(classes.button, className)}
       onClick={onClick}
       disabled={disabled}
@@ -12,4 +15,6 @@ export function Button({ children, onClick, disabled, className }) {
       {children}
     </button>
   );
-}
+};
+
+export default React.memo(Button);
