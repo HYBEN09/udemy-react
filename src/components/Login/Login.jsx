@@ -1,9 +1,16 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 import { AuthContext } from "../../Context/AuthContext";
+import Input from "../UI/Input/Input";
 
 //* reducer function
 const emailReducer = (state, action) => {
@@ -48,10 +55,14 @@ const Login = (props) => {
     isValid: null,
   });
 
-  //* useContext -------------------------------------------------------------
+  //📌 useContext
   const { onLogin } = useContext(AuthContext);
 
-  //* useEffect -------------------------------------------------------------
+  // 📌 useRef
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+
+  //📌 useEffect
 
   // 별칭 할당
   const { isValid: emailIsValid } = emailState;
@@ -93,44 +104,44 @@ const Login = (props) => {
     dispatchPassword({ type: "INPUT_BLUR" });
   };
 
+  // 1. 버튼이 항상 클릭 가능한 건 아니니까 폼이 유효한지 확인하고 유효할 경우에만 onLogin을 호출
+  // 2. 그렇지 않은 경우에는 첫 번째로 찾은 유효하지 않은 인풋을 포커스
   const submitHandler = (event) => {
     event.preventDefault();
-    onLogin(emailState.value, passwordState.value);
+    if (formIsValid) {
+      onLogin(emailState.value, passwordState.value);
+    } else if (!emailIsValid) {
+      emailInputRef.current.focus();
+    } else {
+      passwordInputRef.current.focus();
+    }
   };
 
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            value={emailState.value}
-            onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
-            passwordState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={passwordState.value}
-            onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
-          />
-        </div>
+        <Input
+          ref={emailInputRef}
+          id="email"
+          label="E-Mail"
+          type="email"
+          isValid={emailIsValid}
+          value={emailState.value}
+          onChange={emailChangeHandler}
+          onBlur={validateEmailHandler}
+        />
+        <Input
+          ref={passwordInputRef}
+          id="password"
+          label="Password"
+          type="password"
+          isValid={passwordIsValid}
+          value={passwordState.value}
+          onChange={passwordChangeHandler}
+          onBlur={validatePasswordHandler}
+        />
         <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+          <Button type="submit" className={classes.btn}>
             Login
           </Button>
         </div>
