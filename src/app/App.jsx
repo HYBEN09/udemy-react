@@ -7,7 +7,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function handlerFetchMovie() {
-    const response = await fetch("https://swapi.dev/api/films/");
+    setIsLoading(true);
+    const response = await fetch("https://swapi.dev/api/film/");
     const data = await response.json();
 
     const transformedMovies = data.results.map((movieData) => {
