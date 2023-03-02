@@ -1,31 +1,24 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Button from "../components/UI/Button/Button";
-import DemoOutput from "../components/Demo/Demo";
 import "./App.css";
+import DemoList from "../components/Demo/DemoList";
 function App() {
-  const [showParagraph, setShowParagraph] = useState(false);
-  const [allowToggle, setAllowToggle] = useState(false);
+  const [listTitle, setListTitle] = useState("My List");
 
-  console.log("APP RUNNING");
+  const changeTitleHandler = useCallback(() => {
+    setListTitle("New Title");
+  }, []);
 
-  const toggleParagraphHandler = useCallback(() => {
-    if (allowToggle) {
-      // 동시에 여러 번의 갱신이 스케줄될 수 있으므로 상태를 갱신할 때는
-      // 함수 형태를 이용해서 갱신하는 것을 추천
-      setShowParagraph((prevShowParagraph) => !prevShowParagraph);
-    }
-  }, [allowToggle]);
-
-  const allowToggleHandler = () => {
-    setAllowToggle(true);
-  };
+  //  불필요하게 새로운 배열을 전달하는 것을 막기 위해서 useMemo를 사용 ➡️ 불필요한 재정렬을 막을 수 있다.
+  const listItems = useMemo(() => [5, 3, 1, 10, 9], []);
 
   return (
     <div className="app">
-      <h1>Hi there!</h1>
-      <DemoOutput show={false} />
-      <Button onClick={allowToggleHandler}>Allow Toggling</Button>
-      <Button onClick={toggleParagraphHandler}>Toggle Paragraph!</Button>
+      <DemoList
+        title={listTitle}
+        items={listItems} /*items={[5, 3, 1, 10, 9]}*/
+      />
+      <Button onClick={changeTitleHandler}>Change List Title</Button>
     </div>
   );
 }
