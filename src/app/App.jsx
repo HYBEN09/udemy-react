@@ -1,30 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { MovieList } from "../components/MovieList";
 import "./App.css";
 
 function App() {
-  const dummyMovies = [
-    {
-      id: 1,
-      title: "Some Dummy Movie",
-      openingText: "This is the opening text of the movie",
-      releaseDate: "2021-05-18",
-    },
-    {
-      id: 2,
-      title: "Some Dummy Movie 2",
-      openingText: "This is the second opening text of the movie",
-      releaseDate: "2021-05-19",
-    },
-  ];
+  const [movies, setMovies] = useState([]);
+
+  function handlerFetchMovie() {
+    fetch("https://swapi.dev/api/films/")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedMovies = data.results.map((movieData) => {
+          return {
+            id: movieData.episode_id,
+            title: movieData.title,
+            openingText: movieData.opening_crawl,
+            releaseDate: movieData.release_date,
+          };
+        });
+        setMovies(data.results);
+      })
+      .catch((error) => {
+        console.error("실패:", error);
+      });
+  }
 
   return (
     <React.Fragment>
       <section>
-        <button>Fetch Movies</button>
+        <button onClick={handlerFetchMovie}>Fetch Movies</button>
       </section>
       <section>
-        <MovieList movies={dummyMovies} />
+        <MovieList movies={movies} />
       </section>
     </React.Fragment>
   );
